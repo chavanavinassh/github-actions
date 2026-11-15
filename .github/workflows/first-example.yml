@@ -1,0 +1,20 @@
+name: My FIrst Workflow
+
+on: push
+
+jobs:
+
+  first-job:
+    name: This is frist Job Workflow
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout Repo
+        run: actions/checkout
+        
+      - name: List and Read File
+        run: |
+          echo "My first Github Actions Job"
+          ls ltra
+          cat  README.md
+        
