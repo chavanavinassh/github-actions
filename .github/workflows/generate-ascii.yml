@@ -6,7 +6,7 @@ on: push
 jobs:
 
   build_job_1:
-
+    name: This is Build Job
     runs-on: ubuntu-latest
 
     steps:
@@ -18,27 +18,38 @@ jobs:
       - name: Execute Cowsay CMD
         run: cowsay -f dragon "Run for cover, I am a DRAGON.....RAWAR" >> dragon.txt
 
-      - name: Sleep for 30 seconds
-        run: sleep 30
+      - name: Upload Dragon text file
+        uses: actions/upload-artifact@v7
+        with:
+          name: dragon-text-file
+          path: dragon.txt
 
   test_job_2:
+    name: This is Test Job
     needs: build_job_1
     runs-on: ubuntu-latest
 
     steps:
-    - name:  leep for 30 seconds
-      run: sleep 30
+    
+     - name: Download Dragon text file
+       uses: actions/download-artifact@v8
+       with:
+        name: dragon-text-file # corresponds to the uploaded file name
 
-    - name: Test File Exists
-      run: grep -i "dragon" dragon.txt
+     - name: Test File Exists
+       run: grep -i "dragon" dragon.txt
 
   deploy_job_3:
+    name: This is Deploy Job
     needs: test_job_2
     runs-on: ubuntu-latest
     
     steps:
-       - name: Read File
-         run: cat dragon.txt
+     - name: Download Dragon text file
+       uses: actions/download-artifact@v8
+       with:
+        name: dragon-text-file # corresponds to the uploaded file name
+
+     - name: Read File
+       run: cat dragon.txt
          
-       - name: Deploy 
-         run: echo "Deploying..........."
