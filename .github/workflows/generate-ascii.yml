@@ -1,22 +1,42 @@
 
-name: Generate ASCII With Shell Script
+name: Generate ASCII Artwork
 
 on: push
 
 jobs:
 
-  ascii_job:
-    name: ASCII Value Generate Job
+  build_job_1:
+
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v7
-        
-      - name: List Repo Files
-        run: ls -ltra     
-
-      - name: Execute Shell Script 
+      - name: Install Cowsay Program
         run: |
-          chmod +x ascii-script.sh
-          ./ascii-script.sh
+          sudo apt-get update
+          sudo apt-get install -y cowsay
+
+      - name: Execute Cowsay CMD
+        run: cowsay -f dragon "Run for cover, I am a DRAGON.....RAWAR" >> dragon.txt
+
+      - name: Sleep for 30 seconds
+        run: sleep 30
+
+  test_job_2:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name:  leep for 30 seconds
+      run: sleep 30
+
+    - name: Test File Exists
+      run: grep -i "dragon" dragon.txt
+
+  deploy_job_3:
+    runs-on: ubuntu-latest
+    
+    steps:
+       - name: Read File
+         run: cat dragon.txt
+         
+       - name: Deploy 
+         run: echo "Deploying..........."
