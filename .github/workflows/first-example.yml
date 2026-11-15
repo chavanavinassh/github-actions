@@ -10,7 +10,7 @@ jobs:
 
     steps:
       - name: Checkout Repo
-        run: actions/checkout
+        run: actions/checkout@7
         
       - name: List and Read File
         run: |
