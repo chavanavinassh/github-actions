@@ -1,2 +1,2 @@
 # github-actions
-This repo will used for Github action pratices
+This repo will used for Github action pratices.
