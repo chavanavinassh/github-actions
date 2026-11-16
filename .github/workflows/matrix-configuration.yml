@@ -53,8 +53,6 @@ jobs:
         include:
           - images: amd64/alpine
             os: ubuntu-24.04
-          - images: ://microsoft.com
-            os: windows-latest
             
     runs-on: ${{ matrix.os }}
     
