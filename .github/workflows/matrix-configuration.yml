@@ -3,7 +3,9 @@ name: Matrix Configuration
 on:
   push:
   workflow_dispatch:
-
+concurrency:
+  group: production-deploy
+  cancel-in-progress: true
 # jobs:
 #   deploy:
 #     runs-on: ${{ matrix.os }}
@@ -38,9 +40,6 @@ on:
 
 jobs:
   deploy:
-    concurrency:
-      group: production-deploy
-      cancel-in-progress: true
     strategy:
       fail-fast: false
       max-parallel: 2
