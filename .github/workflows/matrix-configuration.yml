@@ -59,6 +59,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     
     steps:
+      - name: Start Docker Engine on Windows
+        if: runner.os == 'Windows'
+        run: Start-Service docker
+        
       - name: Echo Docker Details
         run: docker info
 
